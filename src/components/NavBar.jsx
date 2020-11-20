@@ -43,7 +43,7 @@ class NavBar extends Component {
           <div className="form-inline my-2 my-lg-0">
             {/* searchbar */}
 
-            <form action="">
+            <form className="searchBar" action="">
               <input type="search" />
               <i class="fa fa-search"></i>
             </form>

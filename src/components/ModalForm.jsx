@@ -26,17 +26,18 @@ class ModalForm extends React.Component {
       <>
         <Modal show={this.props.show} onHide={this.props.onHide}>
           <Modal.Header closeButton className="flex justify-content-center">
-            <img
-              src={this.props.movie.Poster}
-              alt="movie"
-              style={{ objectFit: "cover", height: "200px" }}
-            />
             <Modal.Title className="text-dark">
               {this.props.movie.Title}
             </Modal.Title>
           </Modal.Header>
+          <img
+            src={this.props.movie.Poster}
+            alt="movie"
+            style={{ objectFit: "cover", height: "200px" }}
+          />
           <Modal.Body>
             <CommentList movieId={this.props.movie.imdbID} />
+
             <AddComment movieId={this.props.movie.imdbID} />
           </Modal.Body>
         </Modal>

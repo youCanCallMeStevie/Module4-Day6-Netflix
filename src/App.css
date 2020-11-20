@@ -6,7 +6,7 @@ body {
   background-color: #141414;
   color: white;
 }
-.btn-secondary:not(:disabled):not(.disabled).active,
+/* .btn-secondary:not(:disabled):not(.disabled).active,
 .btn-secondary:not(:disabled):not(.disabled):active,
 .show > .btn-secondary.dropdown-toggle,
 .btn-secondary:not(:disabled):not(.disabled).active:focus,
@@ -18,7 +18,7 @@ body {
 .show > .btn-secondary.dropdown-toggle:focus {
   background-color: transparent !important;
   border-style: none;
-}
+} */
 
 /* Nav Avatars */
 .avatar img {
@@ -43,7 +43,7 @@ body {
 
 /*--- slide-out desktop google custom search (gcs) ---*/
 
-form {
+.searchBar {
   position: relative;
   bottom: -25px;
   transform: translate(-50%, -50%);

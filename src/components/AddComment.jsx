@@ -116,8 +116,11 @@ class AddComment extends React.Component {
               </Form.Group>
             </Col>
           </Row>
-
-          <Button type="submit">Submit</Button>
+          <Row className="flex justify-content-center">
+            <Button variant="danger" type="submit">
+              Submit
+            </Button>
+          </Row>
         </Form>
       </>
     );
