@@ -5,6 +5,7 @@ import SingleMovie from "./SingleMovie";
 class MovieList extends React.Component {
   state = {
     Movies: { batman: [], superman: [], hulk: [] },
+    seletedMovie: null,
   };
 
   getMovies = async (query) => {
@@ -42,7 +43,10 @@ class MovieList extends React.Component {
                 key={`MovieID${movie.imdbID}`}
                 className="mb-3"
               >
-                <SingleMovie Movie={movie} />
+                <SingleMovie
+                  Movie={movie}
+                  onClicked={() => this.setState({ seletedMovie: movie })}
+                />
               </Col>
             ))}
           </Row>
@@ -57,7 +61,10 @@ class MovieList extends React.Component {
                 key={`MovieID${movie.imdbID}`}
                 className="mb-3"
               >
-                <SingleMovie Movie={movie} />
+                <SingleMovie
+                  Movie={movie}
+                  onClicked={() => this.setState({ seletedMovie: movie })}
+                />
               </Col>
             ))}
           </Row>
@@ -72,7 +79,10 @@ class MovieList extends React.Component {
                 key={`MovieID${movie.imdbID}`}
                 className="mb-3"
               >
-                <SingleMovie Movie={movie} />
+                <SingleMovie
+                  Movie={movie}
+                  onClicked={() => this.setState({ seletedMovie: movie })}
+                />
               </Col>
             ))}
           </Row>
