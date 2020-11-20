@@ -45,8 +45,7 @@ body {
 
 form {
   position: relative;
-  top: 60%;
-  left: 40%;
+  bottom: -25px;
   transform: translate(-50%, -50%);
   transition: all 1s;
   width: 50px;
