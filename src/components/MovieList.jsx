@@ -1,11 +1,13 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import SingleMovie from "./SingleMovie";
+import ModalForm from "./ModalForm";
 
 class MovieList extends React.Component {
   state = {
     Movies: { batman: [], superman: [], hulk: [] },
-    seletedMovie: null,
+    selectedMovie: null,
+    displayModal: false,
   };
 
   getMovies = async (query) => {
@@ -33,6 +35,13 @@ class MovieList extends React.Component {
     return (
       <>
         <Container>
+          {this.state.selectedMovie && (
+            <ModalForm
+              show={this.state.displayModal}
+              movie={this.state.selectedMovie}
+              onHide={() => this.setState({ displayModal: false })}
+            />
+          )}
           <h1>BATMAN</h1>
           <Row>
             {this.state.Movies.batman.map((movie) => (
@@ -45,7 +54,9 @@ class MovieList extends React.Component {
               >
                 <SingleMovie
                   Movie={movie}
-                  onClicked={() => this.setState({ seletedMovie: movie })}
+                  onClicked={() =>
+                    this.setState({ displayModal: true, selectedMovie: movie })
+                  }
                 />
               </Col>
             ))}
@@ -63,7 +74,9 @@ class MovieList extends React.Component {
               >
                 <SingleMovie
                   Movie={movie}
-                  onClicked={() => this.setState({ seletedMovie: movie })}
+                  onClicked={() =>
+                    this.setState({ displayModal: true, selectedMovie: movie })
+                  }
                 />
               </Col>
             ))}
@@ -81,7 +94,9 @@ class MovieList extends React.Component {
               >
                 <SingleMovie
                   Movie={movie}
-                  onClicked={() => this.setState({ seletedMovie: movie })}
+                  onClicked={() =>
+                    this.setState({ displayModal: true, selectedMovie: movie })
+                  }
                 />
               </Col>
             ))}

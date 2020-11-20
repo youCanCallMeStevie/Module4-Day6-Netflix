@@ -2,6 +2,10 @@ import React from "react";
 import { Button } from "react-bootstrap";
 
 class SingleMovie extends React.Component {
+  state = {
+    clicked: false,
+  };
+
   render() {
     return (
       <div className="col mb-3 mb-lg-0 pr-1 movieCard">
