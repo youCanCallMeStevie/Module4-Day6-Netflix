@@ -40,14 +40,7 @@ class NavBar extends Component {
               </a>
             </li>
           </ul>
-          <div className="form-inline my-2 my-lg-0">
-            {/* searchbar */}
 
-            <form className="searchBar" action="">
-              <input type="search" />
-              <i class="fa fa-search"></i>
-            </form>
-          </div>
           <div className="bell-container">
             <i className="fa fa-bell mr-3 fa-lg"></i>
           </div>

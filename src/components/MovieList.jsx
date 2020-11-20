@@ -10,6 +10,23 @@ class MovieList extends React.Component {
     displayModal: false,
   };
 
+  HandleSearchQuery = (query) => {
+    let newMovies = { ...this.state.Movies };
+
+    if (query) {
+      for (let category in newMovies) {
+        let filteredcategory = newMovies[category].filter((movie) =>
+          movie.Title.toLowerCase().includes(query.toLowerCase())
+        );
+
+        newMovies[category] = filteredcategory;
+        this.setState({ Movies: newMovies });
+      }
+    } else {
+      this.setState({ Movies: { batman: [], superman: [], hulk: [] } });
+    }
+  };
+
   getMovies = async (query) => {
     try {
       let response = await fetch(
@@ -24,6 +41,7 @@ class MovieList extends React.Component {
       console.log("error: ", e);
     }
   };
+
   componentDidMount = () => {
     const movieList = ["batman", "superman", "hulk"];
     for (let arr of movieList) {
@@ -42,7 +60,21 @@ class MovieList extends React.Component {
               onHide={() => this.setState({ displayModal: false })}
             />
           )}
-          <h1>BATMAN</h1>
+          <div className="form-inline my-2 my-lg-0">
+            {/* searchbar */}
+
+            <form className="searchBar" action="">
+              <input
+                type="search"
+                onChange={(e) => {
+                  this.HandleSearchQuery(e.target.value);
+                }}
+              />
+              <i class="fa fa-search"></i>
+            </form>
+          </div>
+
+          <h1 className="mt-4 mb-3">BATMAN</h1>
           <Row>
             {this.state.Movies.batman.map((movie) => (
               <Col
@@ -55,14 +87,17 @@ class MovieList extends React.Component {
                 <SingleMovie
                   Movie={movie}
                   onClicked={() =>
-                    this.setState({ displayModal: true, selectedMovie: movie })
+                    this.setState({
+                      displayModal: true,
+                      selectedMovie: movie,
+                    })
                   }
                 />
               </Col>
             ))}
           </Row>
 
-          <h1>SUPERMAN</h1>
+          <h1 className="mt-4 mb-3">SUPERMAN</h1>
           <Row>
             {this.state.Movies.superman.map((movie) => (
               <Col
@@ -75,14 +110,17 @@ class MovieList extends React.Component {
                 <SingleMovie
                   Movie={movie}
                   onClicked={() =>
-                    this.setState({ displayModal: true, selectedMovie: movie })
+                    this.setState({
+                      displayModal: true,
+                      selectedMovie: movie,
+                    })
                   }
                 />
               </Col>
             ))}
           </Row>
 
-          <h1>HULK</h1>
+          <h1 className="mt-4 mb-3">HULK</h1>
           <Row>
             {this.state.Movies.hulk.map((movie) => (
               <Col
@@ -95,7 +133,10 @@ class MovieList extends React.Component {
                 <SingleMovie
                   Movie={movie}
                   onClicked={() =>
-                    this.setState({ displayModal: true, selectedMovie: movie })
+                    this.setState({
+                      displayModal: true,
+                      selectedMovie: movie,
+                    })
                   }
                 />
               </Col>
