@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
 /*NAVBAR*/
@@ -100,4 +101,25 @@ form:hover input {
 form:hover .fa {
 	background: #07051a;
 	color: white;
+
+.thumbnails {
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+div.col.mb-3:hover h4 {
+  position: absolute;
+  left: 0;
+  bottom: -5;
+
+  display: block !important;
+}
+
+div.col.mb-3:hover button {
+  position: absolute;
+  left: 20%;
+  bottom: 40%;
+  display: block !important;
+
 }
