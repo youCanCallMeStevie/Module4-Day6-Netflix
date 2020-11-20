@@ -6,7 +6,7 @@ class SingleMovie extends React.Component {
     return (
       <div className="col mb-3 mb-lg-0 pr-1 movieCard">
         <img src={this.props.Movie.Poster} className="img-fluid thumbnails" />
-        <h4 className="text-dark" style={{ display: "none" }}>
+        <h4 className="text-light" style={{ display: "none" }}>
           {this.props.Movie.Title}
         </h4>
 
