@@ -8,9 +8,9 @@ class SingleMovie extends React.Component {
 
   render() {
     return (
-      <div className="col mb-3 mb-lg-0 pr-1 movieCard">
-        <img src={this.props.Movie.Poster} className="img-fluid thumbnails" />
-        <h4 className="text-light" style={{ display: "none" }}>
+      <div className="col mb-5 mb-lg-0 pr-1 no-gutters mx-0">
+        <span className="overlay-icons"><img src={this.props.Movie.Poster} className="img-fluid thumbnails" />
+        <h4 className="text-light movieCard" style={{ display: "none" }}>
           {this.props.Movie.Title}
         </h4>
 
@@ -21,6 +21,7 @@ class SingleMovie extends React.Component {
         >
           View Details
         </Button>
+        </span>
       </div>
     );
   }

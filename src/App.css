@@ -101,22 +101,66 @@ form:hover .fa {
   color: white;
 }
 .thumbnails {
-  height: 150px;
+  height: 200px;
   object-fit: cover;
   border-radius: 5px;
 }
 
-div.col.mb-3:hover h4 {
+.thumbnails::after {
+  background-color: black;
+  transform: scaleX(0);
+  transition: 300ms ease-in-out;
+  z-index: 1;
+}
+
+.thumbnails:hover:after {
+  transform: scaleX(1);
+  z-index: 1000;
+}
+
+/* .movieCard:hover {
+  background-color: rgba(0, 0, 0, 0.644);
+  z-index: 99;
+} */
+
+.overlay-icons:hover h4 {
+  background-color: rgba(0, 0, 0, 0.644);
+  font-size: 20px;
   position: absolute;
   left: 0;
-  bottom: -5;
-
+  top: 5px;
   display: block !important;
+  z-index: 2;
 }
 
-div.col.mb-3:hover button {
+.overlay-icons:hover button {
   position: absolute;
-  left: 20%;
-  bottom: 40%;
+  bottom: 10%;
+  right: 1px;
   display: block !important;
+  z-index: 3;
 }
+
+.footer__container {
+  font-size: 10px;
+}
+
+/* .movieCard .overlay-icons:after {
+  display: inline-block;
+  content: "";
+  background-color: white;
+  border: 10px;
+  transform: scaleX(0);
+  transition: 300ms ease-in-out;
+  z-index: 1000;
+  position: absolute;
+  left: -10px;
+  bottom: -5px;
+  height: 150%;
+  width: 2.5px;
+}
+
+.movieCard .overlay-icons:hover:after {
+  transform: scaleX(1);
+  z-index: 1000;
+} */
