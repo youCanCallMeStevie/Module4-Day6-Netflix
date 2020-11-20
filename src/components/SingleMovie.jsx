@@ -10,7 +10,11 @@ class SingleMovie extends React.Component {
           {this.props.Movie.Title}
         </h4>
 
-        <Button variant="danger" style={{ display: "none" }}>
+        <Button
+          variant="danger"
+          style={{ display: "none" }}
+          onClick={this.props.onClicked}
+        >
           View Details
         </Button>
       </div>

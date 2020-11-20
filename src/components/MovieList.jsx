@@ -4,19 +4,28 @@ import SingleMovie from "./SingleMovie";
 
 class MovieList extends React.Component {
   state = {
-    Movies: [],
+    Movies: { batman: [], superman: [], hulk: [] },
+    seletedMovie: null,
   };
 
-  componentDidMount = async () => {
+  getMovies = async (query) => {
     try {
       let response = await fetch(
-        "http://www.omdbapi.com/?apikey=827e9820&s=harry%20potter"
+        "http://www.omdbapi.com/?apikey=827e9820&s=" + query
       );
-      let Movies = await response.json();
-
-      this.setState({ Movies: Movies.Search });
+      let movies = await response.json();
+      console.log(movies.Search);
+      let newMovies = { ...this.state.Movies };
+      newMovies[query] = movies.Search;
+      this.setState({ Movies: newMovies });
     } catch (e) {
       console.log("error: ", e);
+    }
+  };
+  componentDidMount = () => {
+    const movieList = ["batman", "superman", "hulk"];
+    for (let arr of movieList) {
+      this.getMovies(arr);
     }
   };
 
@@ -24,8 +33,9 @@ class MovieList extends React.Component {
     return (
       <>
         <Container>
+          <h1>BATMAN</h1>
           <Row>
-            {this.state.Movies.map((movie) => (
+            {this.state.Movies.batman.map((movie) => (
               <Col
                 xs={12}
                 md={3}
@@ -33,7 +43,46 @@ class MovieList extends React.Component {
                 key={`MovieID${movie.imdbID}`}
                 className="mb-3"
               >
-                <SingleMovie Movie={movie} />
+                <SingleMovie
+                  Movie={movie}
+                  onClicked={() => this.setState({ seletedMovie: movie })}
+                />
+              </Col>
+            ))}
+          </Row>
+
+          <h1>SUPERMAN</h1>
+          <Row>
+            {this.state.Movies.superman.map((movie) => (
+              <Col
+                xs={12}
+                md={3}
+                lg={2}
+                key={`MovieID${movie.imdbID}`}
+                className="mb-3"
+              >
+                <SingleMovie
+                  Movie={movie}
+                  onClicked={() => this.setState({ seletedMovie: movie })}
+                />
+              </Col>
+            ))}
+          </Row>
+
+          <h1>HULK</h1>
+          <Row>
+            {this.state.Movies.hulk.map((movie) => (
+              <Col
+                xs={12}
+                md={3}
+                lg={2}
+                key={`MovieID${movie.imdbID}`}
+                className="mb-3"
+              >
+                <SingleMovie
+                  Movie={movie}
+                  onClicked={() => this.setState({ seletedMovie: movie })}
+                />
               </Col>
             ))}
           </Row>
