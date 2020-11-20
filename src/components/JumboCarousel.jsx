@@ -39,7 +39,7 @@ class JumboCarousel extends React.Component {
               opacity: "0.5",
               height: "400px",
               width: "800px",
-              "object-fit": "cover",
+              objectFit: "cover",
             }}
             className="d-block w-100"
             src="https://i.ytimg.com/vi/gwcO4PRASDQ/maxresdefault.jpg"
