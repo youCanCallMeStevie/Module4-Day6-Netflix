@@ -11,7 +11,7 @@ class AddComment extends React.Component {
     errMessage: "",
   };
 
-  updateCommentField = (e) => {
+  updateCommentField = e => {
     let addComment = { ...this.state.addComment };
     let currentId = e.currentTarget.id;
 
@@ -20,7 +20,7 @@ class AddComment extends React.Component {
     this.setState({ addComment });
   };
 
-  submitComment = async (e) => {
+  submitComment = async e => {
     e.preventDefault();
     try {
       let response = await fetch(
