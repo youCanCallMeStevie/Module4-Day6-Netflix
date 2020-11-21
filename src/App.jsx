@@ -13,7 +13,6 @@ function App() {
       <JumboCarousel />
       <MovieList />
       <Footer />
-
     </div>
   );
 }

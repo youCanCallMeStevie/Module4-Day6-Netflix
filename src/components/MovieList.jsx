@@ -70,7 +70,7 @@ class MovieList extends React.Component {
                   this.HandleSearchQuery(e.target.value);
                 }}
               />
-              <i class="fa fa-search"></i>
+              <i className="fa fa-search"></i>
             </form>
           </div>
 
@@ -78,7 +78,7 @@ class MovieList extends React.Component {
           <Row>
             {this.state.Movies.batman.map((movie) => (
               <Col
-                xs={12}
+                xs={6}
                 md={3}
                 lg={2}
                 key={`MovieID${movie.imdbID}`}
@@ -101,7 +101,7 @@ class MovieList extends React.Component {
           <Row>
             {this.state.Movies.superman.map((movie) => (
               <Col
-                xs={12}
+                xs={6}
                 md={3}
                 lg={2}
                 key={`MovieID${movie.imdbID}`}
@@ -124,7 +124,7 @@ class MovieList extends React.Component {
           <Row>
             {this.state.Movies.hulk.map((movie) => (
               <Col
-                xs={12}
+                xs={6}
                 md={3}
                 lg={2}
                 key={`MovieID${movie.imdbID}`}
