@@ -6,7 +6,7 @@ class JumboCarousel extends React.Component {
     index: 0,
   };
 
-  handleSelect = e => {
+  handleSelect = (e) => {
     return this.setState({
       index: { e },
     });
@@ -21,7 +21,7 @@ class JumboCarousel extends React.Component {
               opacity: "0.5",
               height: "400px",
               width: "800px",
-              "object-fit": "cover",
+              objectFit: "cover",
             }}
             className="d-block w-100"
             src="https://miro.medium.com/max/1200/0*oBDno6Kr63I8r4li"
@@ -39,7 +39,7 @@ class JumboCarousel extends React.Component {
               opacity: "0.5",
               height: "400px",
               width: "800px",
-              "object-fit": "cover",
+              objectFit: "cover",
             }}
             className="d-block w-100"
             src="https://i.ytimg.com/vi/gwcO4PRASDQ/maxresdefault.jpg"
@@ -58,7 +58,7 @@ class JumboCarousel extends React.Component {
               opacity: "0.5",
               height: "400px",
               width: "800px",
-              "object-fit": "cover",
+              objectFit: "cover",
             }}
             className="d-block w-100"
             src="https://magazinepragma.com/wp-content/uploads/2020/11/il-talento-del-calabrone-cover.jpg"
