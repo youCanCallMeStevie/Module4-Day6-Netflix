@@ -5,37 +5,22 @@ import ModalForm from "./ModalForm";
 
 class MovieList extends React.Component {
   state = {
-    Movies: { batman: [], superman: [], hulk: [] },
+    Movies: [],
     selectedMovie: null,
     displayModal: false,
   };
 
-  HandleSearchQuery = (query) => {
-    let newMovies = { ...this.state.Movies };
-
-    if (query) {
-      for (let category in newMovies) {
-        let filteredcategory = newMovies[category].filter((movie) =>
-          movie.Title.toLowerCase().includes(query.toLowerCase())
-        );
-
-        newMovies[category] = filteredcategory;
-        this.setState({ Movies: newMovies });
-      }
-    } else {
-      this.setState({ Movies: { batman: [], superman: [], hulk: [] } });
-    }
-  };
-
-  getMovies = async (query) => {
+  getMovies = async () => {
     try {
       let response = await fetch(
-        "http://www.omdbapi.com/?apikey=827e9820&s=" + query
+        "http://www.omdbapi.com/?apikey=827e9820&s=" + this.props.query
       );
       let movies = await response.json();
       console.log(movies.Search);
-      let newMovies = { ...this.state.Movies };
-      newMovies[query] = movies.Search;
+      // let newMovies = { ...this.state.Movies };
+      // newMovies[query] = movies.Search;
+      let newMovies = movies.Search;
+
       this.setState({ Movies: newMovies });
     } catch (e) {
       console.log("error: ", e);
@@ -43,10 +28,7 @@ class MovieList extends React.Component {
   };
 
   componentDidMount = () => {
-    const movieList = ["batman", "superman", "hulk"];
-    for (let arr of movieList) {
-      this.getMovies(arr);
-    }
+    this.getMovies();
   };
 
   render() {
@@ -60,23 +42,10 @@ class MovieList extends React.Component {
               onHide={() => this.setState({ displayModal: false })}
             />
           )}
-          <div className="form-inline my-2 my-lg-0">
-            {/* searchbar */}
 
-            <form className="searchBar" action="">
-              <input
-                type="search"
-                onChange={(e) => {
-                  this.HandleSearchQuery(e.target.value);
-                }}
-              />
-              <i className="fa fa-search"></i>
-            </form>
-          </div>
-
-          <h1 className="mt-4 mb-3">BATMAN</h1>
+          <h1 className="mt-4 mb-3">{this.props.query.toUpperCase()}</h1>
           <Row>
-            {this.state.Movies.batman.map((movie) => (
+            {this.state.Movies.map((movie) => (
               <Col
                 xs={6}
                 md={3}
@@ -97,7 +66,7 @@ class MovieList extends React.Component {
             ))}
           </Row>
 
-          <h1 className="mt-4 mb-3">SUPERMAN</h1>
+          {/* <h1 className="mt-4 mb-3">SUPERMAN</h1>
           <Row>
             {this.state.Movies.superman.map((movie) => (
               <Col
@@ -141,7 +110,7 @@ class MovieList extends React.Component {
                 />
               </Col>
             ))}
-          </Row>
+          </Row> */}
         </Container>
       </>
     );
