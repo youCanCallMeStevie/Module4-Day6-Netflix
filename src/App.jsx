@@ -4,16 +4,16 @@ import React from "react";
 import "./App.css";
 import JumboCarousel from "./components/JumboCarousel";
 import NavBar from "./components/NavBar";
-import MovieList from "./components/MovieList";
+import Home from "./components/Home";
 import Footer from "./components/Footer";
+
 function App() {
   return (
     <div className="App">
       <NavBar />
       <JumboCarousel />
-      <MovieList />
+      <Home />
       <Footer />
-
     </div>
   );
 }
