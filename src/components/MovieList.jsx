@@ -10,16 +10,33 @@ class MovieList extends React.Component {
     displayModal: false,
   };
 
+  sortAsc = (array) => {
+    array.sort(function (a, b) {
+      var movieA = a.Year; // ignore upper and lowercase
+      var movieB = b.Year; // ignore upper and lowercase
+      if (movieA > movieB) {
+        return -1;
+      }
+      if (movieA < movieB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    });
+  };
+
   getMovies = async () => {
     try {
       let response = await fetch(
         "http://www.omdbapi.com/?apikey=827e9820&s=" + this.props.query
       );
       let movies = await response.json();
-      console.log(movies.Search);
+
       // let newMovies = { ...this.state.Movies };
       // newMovies[query] = movies.Search;
       let newMovies = movies.Search;
+      this.sortAsc(newMovies);
 
       this.setState({ Movies: newMovies });
     } catch (e) {
