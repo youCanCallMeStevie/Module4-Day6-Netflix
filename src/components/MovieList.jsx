@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import SingleMovie from "./SingleMovie";
 import ModalForm from "./ModalForm";
 
@@ -8,6 +8,7 @@ class MovieList extends React.Component {
     Movies: [],
     selectedMovie: null,
     displayModal: false,
+    loading: true,
   };
 
   sortAsc = (array) => {
@@ -29,23 +30,39 @@ class MovieList extends React.Component {
   getMovies = async () => {
     try {
       let response = await fetch(
-        "http://www.omdbapi.com/?apikey=827e9820&s=" + this.props.query
+        "http://www.omdbapi.com/?i=tt3896198&apikey=1bee4676&s=" + this.props.query
       );
+      if (response.ok){
+        // console.log(response)
       let movies = await response.json();
-
-      // let newMovies = { ...this.state.Movies };
-      // newMovies[query] = movies.Search;
+      setTimeout(() => {
+        this.setState({ Movies: movies.Search, loading: false}) //after the fetch is completed, and we have the info the info we are asking for, we are reverting the loading state
+      }, 1000);
       let newMovies = movies.Search;
       this.sortAsc(newMovies);
-
       this.setState({ Movies: newMovies });
-    } catch (e) {
-      console.log("error: ", e);
-    }
+      } else {
+        console.log("An error has happened!");
+        this.setState({ loading: false });
+      }  
+    } catch (error) {
+        console.log("There has been an error", error);
+        this.setState({ loading: false });
+      }
   };
 
+
   componentDidMount = () => {
+    console.log("Movie has finished mounting");
     this.getMovies();
+  };
+
+  componentDidUpdate= (previousProps) => {
+    if (previousProps.query !== this.props.query) { //it means we selected a new movie from the dropdown,also changing the props & not in the state
+      console.log("Previous Movie is different than Current Movie");
+    console.log("Performing the fetch");
+    this.getMovies();
+    }
   };
 
   render() {
@@ -62,7 +79,7 @@ class MovieList extends React.Component {
 
           <h1 className="mt-4 mb-3">{this.props.query.toUpperCase()}</h1>
           <Row>
-            {this.state.Movies.map((movie) => (
+            {!this.state.loading ? this.state.Movies.map((movie) => (
               <Col
                 xs={6}
                 md={3}
@@ -80,54 +97,13 @@ class MovieList extends React.Component {
                   }
                 />
               </Col>
-            ))}
+            ))
+          : <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+  }
           </Row>
 
-          {/* <h1 className="mt-4 mb-3">SUPERMAN</h1>
-          <Row>
-            {this.state.Movies.superman.map((movie) => (
-              <Col
-                xs={6}
-                md={3}
-                lg={2}
-                key={`MovieID${movie.imdbID}`}
-                className="mb-3"
-              >
-                <SingleMovie
-                  Movie={movie}
-                  onClicked={() =>
-                    this.setState({
-                      displayModal: true,
-                      selectedMovie: movie,
-                    })
-                  }
-                />
-              </Col>
-            ))}
-          </Row>
-
-          <h1 className="mt-4 mb-3">HULK</h1>
-          <Row>
-            {this.state.Movies.hulk.map((movie) => (
-              <Col
-                xs={6}
-                md={3}
-                lg={2}
-                key={`MovieID${movie.imdbID}`}
-                className="mb-3"
-              >
-                <SingleMovie
-                  Movie={movie}
-                  onClicked={() =>
-                    this.setState({
-                      displayModal: true,
-                      selectedMovie: movie,
-                    })
-                  }
-                />
-              </Col>
-            ))}
-          </Row> */}
         </Container>
       </>
     );

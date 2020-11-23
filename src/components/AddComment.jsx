@@ -9,6 +9,8 @@ class AddComment extends React.Component {
       elementId: this.props.movieId,
     },
     errMessage: "",
+    show: false,
+
   };
 
   updateCommentField = e => {
@@ -33,33 +35,39 @@ class AddComment extends React.Component {
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmI2NmVlNDk4MzViMDAwMTc1ODRlZWYiLCJpYXQiOjE2MDU3OTE0NjEsImV4cCI6MTYwNzAwMTA2MX0.YTGWs-WE6fSktqoFHduczyCMUNBgU_oun60C8b9uJnk",
           }),
-        }
-      );
-
-      if (response.ok) {
-        alert("Comment saved!");
-        this.setState({
-          addComment: {
-            comment: "",
-            rate: 1,
-            elementId: this.props.bookId,
-          },
-          errMessage: "",
         });
-      } else {
+
+        if (response.ok) {
+          alert("Comment saved!");
+          this.setState({
+            addComment: {
+              comment: "",
+              rate: 1,
+              elementId: this.props.bookId,
+            },
+            errMessage: "",
+            show: false
+          });
+        } else {
         console.log("an error occurred");
         let error = await response.json();
         this.setState({
           errMessage: error.message,
         });
       }
-    } catch (e) {
-      console.log(e); // Error
+    } catch (error) {
+      console.log(error); // Error
       this.setState({
-        errMessage: e.message,
+        errMessage: error.message,
       });
     }
   };
+
+  // componentDidUpdate= (previousProps) => {
+  //   if { 
+    
+  //   }
+  // };
 
   render() {
     return (
@@ -117,7 +125,7 @@ class AddComment extends React.Component {
             </Col>
           </Row>
           <Row className="flex justify-content-center">
-            <Button variant="danger" type="submit">
+            <Button variant="danger" type="submit" >
               Submit
             </Button>
           </Row>

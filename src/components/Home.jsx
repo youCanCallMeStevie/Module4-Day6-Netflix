@@ -1,5 +1,6 @@
 import React from "react";
 import MovieList from "./MovieList";
+import { FormControl, Button, Form, Navbar } from "react-bootstrap";
 
 class Home extends React.Component {
   state = {
@@ -7,8 +8,8 @@ class Home extends React.Component {
     isTyped: false,
   };
 
-  HandleSearchQuery = (query) => {
-    if (query.length >= 3) {
+  HandleSearchQuery = query => {
+    if (query.length > 2) {
       this.setState({ keyWord: query, isTyped: true });
     } else {
       this.setState({ keyWord: "", isTyped: false });
@@ -18,10 +19,21 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <div className="form-inline my-2 my-lg-0">
-          {/* searchbar */}
+        
+          <Form inline style ={{paddingTop: "15px"}} >
+            <FormControl
+              type="text"
+              placeholder="Search Movies"
+              className="mr-sm-2"
+              onChange={e => {
+                this.HandleSearchQuery(e.target.value);
+              }}
+              style={{position: "relative", marginLeft: "40vw"}}
+            />
+            <Button variant="outline-primary">Search</Button>
+          </Form>
 
-          <form className="searchBar" action="">
+        {/* <form className="searchBar" action="">
             <input
               type="search"
               onChange={(e) => {
@@ -29,8 +41,7 @@ class Home extends React.Component {
               }}
             />
             <i className="fa fa-search"></i>
-          </form>
-        </div>
+          </form> */}
         {this.state.isTyped ? (
           <MovieList query={this.state.keyWord} />
         ) : (
