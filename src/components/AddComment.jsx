@@ -38,7 +38,10 @@ class AddComment extends React.Component {
         });
 
         if (response.ok) {
-          alert("Comment saved!");
+
+          this.props.addNewComment(this.state.addComment)
+
+          //alert("Comment saved!");
           this.setState({
             addComment: {
               comment: "",
@@ -47,7 +50,8 @@ class AddComment extends React.Component {
             },
             errMessage: "",
             show: false
-          });
+          }, );
+          
         } else {
         console.log("an error occurred");
         let error = await response.json();
