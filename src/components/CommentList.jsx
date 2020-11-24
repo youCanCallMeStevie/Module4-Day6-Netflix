@@ -18,14 +18,11 @@ class CommentList extends React.Component {
           }),
         }
       );
-      if (response.ok) {
-        let comments = await response.json();
-        console.log(comments);
-        this.setState({ comments, loading: false }); //these results will now fill the empty state array
-      }
+      let comments = await response.json();
+      console.log(comments);
+      this.setState({ comments }); //these results will now fill the empty state array
     } catch (e) {
       console.log("error: ", e);
-      this.setState({ loading: false });
     }
   };
 
@@ -33,10 +30,12 @@ class CommentList extends React.Component {
     this.commentFetch();
   };
 
+  componentDidMount = () => {
+    this.commentFetch();
+  };
+
   componentDidUpdate = (previousProps, previousState) => {
-    if (
-      JSON.stringify(prevState.comments) !== JSON.stringify(this.state.comments)
-    ) {
+    if (previousState.comments !== this.state.comments) {
       this.commentFetch();
     }
   };
