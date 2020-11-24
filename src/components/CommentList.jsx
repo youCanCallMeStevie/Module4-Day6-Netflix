@@ -3,43 +3,49 @@ import { ListGroup, Badge } from "react-bootstrap";
 class CommentList extends React.Component {
   state = {
     comments: [],
+    loading: true,
   };
 
-commentFetch = async () => {
+  commentFetch = async () => {
     try {
       let response = await fetch(
-      "https://striveschool-api.herokuapp.com/api/comments/",
+        "https://striveschool-api.herokuapp.com/api/comments/",
 
-      {
-        headers: new Headers({
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmI2NWY4OTk4MzViMDAwMTc1ODRlZTIiLCJpYXQiOjE2MDU4NjU2MjQsImV4cCI6MTYwNzA3NTIyNH0.IdqIspL4rMxO-KBqvMMNspg3ITHwYcIBjTPhoBq4wEA",
-        }),
+        {
+          headers: new Headers({
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmI2NWY4OTk4MzViMDAwMTc1ODRlZTIiLCJpYXQiOjE2MDU4NjU2MjQsImV4cCI6MTYwNzA3NTIyNH0.IdqIspL4rMxO-KBqvMMNspg3ITHwYcIBjTPhoBq4wEA",
+          }),
+        }
+      );
+      if (response.ok) {
+        let comments = await response.json();
+        console.log(comments);
+        this.setState({ comments, loading: false }); //these results will now fill the empty state array
       }
-    );
-    let comments = await response.json();
-    console.log(comments);
-    this.setState({ comments }); //these results will now fill the empty state array 
-  } catch (e) {
-    console.log("error: ", e);
-  }
-  }
-
-componentDidMount =  () => {
-   this.commentFetch()
+    } catch (e) {
+      console.log("error: ", e);
+      this.setState({ loading: false });
+    }
   };
 
-componentDidUpdate = (previousProps, previousState) => {
-  if(previousState.comments !== this.state.comments)
-   {this.commentFetch()}
-}
+  componentDidMount = () => {
+    this.commentFetch();
+  };
 
+  componentDidUpdate = (previousProps, previousState) => {
+    if (
+      JSON.stringify(prevState.comments) !== JSON.stringify(this.state.comments)
+    ) {
+      this.commentFetch();
+    }
+  };
 
   render() {
     return (
       <div className="mb-5">
         {this.state.comments
-          .filter((res) => res.elementId === this.props.movieId)
+          .filter(res => res.elementId === this.props.movieId)
           .map((comment, index) => {
             let variant = "";
 

@@ -9,7 +9,7 @@ class SingleMovie extends React.Component {
   render() {
     return (
       <div className="col mb-5 mb-lg-0 pr-1 no-gutters mx-0">
-        <span className="overlay-icons"><img src={this.props.Movie.Poster} className="img-fluid thumbnails" />
+        <span className="overlay-icons"><img src={this.props.Movie.Poster} alt="" className="img-fluid thumbnails" />
         <h4 className="text-light movieCard" style={{ display: "none" }}>
           {this.props.Movie.Title}
         </h4>

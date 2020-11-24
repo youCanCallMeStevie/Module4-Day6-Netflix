@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import React from "react";
+import { Modal } from "react-bootstrap";
 import AddComment from "./AddComment";
 import CommentList from "./CommentList";
-import MovieList from "./MovieList";
 
 class ModalForm extends React.Component {
   state = {

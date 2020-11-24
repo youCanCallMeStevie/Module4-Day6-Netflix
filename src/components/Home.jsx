@@ -1,6 +1,6 @@
 import React from "react";
 import MovieList from "./MovieList";
-import { FormControl, Button, Form, Navbar } from "react-bootstrap";
+import { FormControl, Button, Form } from "react-bootstrap";
 
 class Home extends React.Component {
   state = {
